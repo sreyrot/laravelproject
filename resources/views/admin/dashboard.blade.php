@@ -116,7 +116,6 @@
                      <form action="{{route('students.destroy',$item->id)}}" method="post">
                        @method('delete')
                        @csrf
-                     
                        <button style="border: none; color: blue;"><i class='fas fa-trash-alt' style="color: black"  onclick="return confirm('Are you sure?')"></i> </button>
                      </form>
                 </div>
@@ -151,7 +150,7 @@
                <td>{{$item->description}}</td>
              <td>
               <div class="row ml-5" >
-             
+                <button style="border: none;"><a href="{{route('backToFollowUP', $item->id)}}"><i style="color: green" class="fas fa-user-plus"></i></a></button>
               </div>
             </td>
          </tr>

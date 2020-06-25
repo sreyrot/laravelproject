@@ -72,6 +72,7 @@
                <td>{{$item->description}}</td>
              <td>
               <div class="row ml-5" >
+                <button style="border: none;"><a href="{{route('backToFollowUP', $item->id)}}"><i style="color: green" class="fas fa-user-plus"></i></a></button>
               </div>
             </td>
          </tr>
