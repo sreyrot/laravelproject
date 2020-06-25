@@ -125,7 +125,7 @@
                                 @csrf
                                 @method('delete')
                                             
-                                    <button id="delete" onclick="return confirm('Are you sure?')" > <i class="fas fa-trash"></i> </button>
+                                    <button id="delete"  > <i class="fas fa-trash"></i> </button>
                             </form>
 
                         </div>
@@ -157,3 +157,11 @@
 
 </body>
 </html>
+
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>

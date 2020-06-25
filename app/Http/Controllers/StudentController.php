@@ -82,7 +82,10 @@ class StudentController extends Controller
     public function edit($id)
     {
         $students = Student::find($id);
-        return view('student.formedit', compact('students'));
+        $user = User::all();
+        
+        // return view('student.formedit', compact('students'));
+        return view('student.formedit')->with(compact('user', $user))->with(compact('students', $students));
     }
 
     /**
@@ -95,31 +98,24 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $students = Student::find($id);
+       
 
         $students->firstname = $request->get('fname');
         $students->lastname = $request->get('lname');
         $students->class = $request->get('class');
         $students->description = $request->get('description');
         $students->user_id = $request->get('tutor');
+
+       
           $img = $request->file('picture');
           $filename = time() . '.' . $img->getClientOriginalExtension();
           $location = public_path('image/'.$filename);
           Image::make($img)->resize(100,100)->save($location);
           $students->picture = $filename;
-          $students -> save();
-        return redirect('admin/dashboard');
-    }
+     
+        $students -> save();
+         
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $students = Student::find($id);
-          $students -> delete();
       return redirect('admin/dashboard');
     }
 

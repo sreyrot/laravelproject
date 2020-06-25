@@ -48,7 +48,8 @@
                       <div class="input-group">
                           <div class="custom-file">
                             <label class="custom-file-lable"></label>
-                            <input type="file" value="{{$students->picture}}" class="form-control" name="picture" >
+                            
+                            <input type="file" {{$students->picture}} class="form-control" name="picture" >
                           </div>
                       </div>
 
@@ -63,8 +64,10 @@
                 <div class="form-group">
                   <select required autocomplete="position" class="browser-default custom-select" name="tutor">
                     <option selected>choose Role</option>
-                    <option value="1" {{ ($students->user_id == 1) ? 'selected' : '' }}>Admin</option>
-                    <option value="0" {{ ($students->user_id == 2) ? 'selected' : '' }}>Normal</option>
+                    @foreach ($user as $item)
+                    <option value="{{$item->id}}" {{ ($students->user_id == $item->id) ? 'selected' : '' }}>{{$item->firstName}}</option>
+                    @endforeach
+                    {{-- <option value="0" {{ ($students->user_id == 2) ? 'selected' : '' }}>Normal</option> --}}
                  </select>
                 </div>
                  

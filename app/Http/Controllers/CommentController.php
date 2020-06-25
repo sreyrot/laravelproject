@@ -30,8 +30,11 @@ public function delete($id)
   if(!is_null($comment)){
   //execute if exist
   $comment->delete();
+  return back();
+  }else{
+    return redirect()->back() ->with('alert', 'Oop! Your are not a user login...');
   }
-return back();
+
 
 }
 
@@ -44,8 +47,12 @@ public function updatecomment($id, Request $request)
   if(!is_null($comment)){
       $comment->comment = $request->get('comment');
       $comment ->save();
+      return redirect()->back();
+  }else{
+    return redirect()->back() ->with('alert', 'Oop! Your are not a user login...');
   }
-    return back();
+  
 }
 
 }
+

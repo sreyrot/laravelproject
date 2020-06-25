@@ -35,7 +35,6 @@ Route::put('/updatecomment/{id}', 'CommentController@updatecomment')->name('upda
 
 
 // normal user login ( student information )
-Route::resource('/student','studentForUserController');
 
 
 /// all user (normal + admin)
