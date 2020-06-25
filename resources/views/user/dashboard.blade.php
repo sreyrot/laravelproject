@@ -39,7 +39,7 @@
                <td>
                 <div class="row ml-5" >
                  <button style="border: none; ">  <a href="{{route('students.show',$item->id)}}" ><i class="fas fa-eye" style="color: green"></i></a> </button>
-                   
+                 <button style="border: none; "><a href="{{route('archiveFollowup', $item->id)}}" style="color: red"><i class="fa fa-user-times"></i></a></button>
                 </div>
               </td>
            </tr>

@@ -123,6 +123,12 @@ class StudentController extends Controller
       return redirect('admin/dashboard');
     }
 
-  
+  // archive followup
+  public function archiveFollowup($id){
+    $students = Student::find($id);
+    $students->activeFollowup = false;
+    $students-> save();
+    return back();
+  }
   
 }
