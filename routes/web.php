@@ -26,6 +26,10 @@ Route::resource('/students','StudentController');
 Route::get('/archive/{id}','StudentController@archiveFollowup')->name('archiveFollowup');
 Route::get('/backtofollowup/{id}','StudentController@backToFollowUP')->name('backToFollowUP');
 
+// comment
+Route::post('/addcomment/{id}', 'CommentController@addComment')->name('addcomment');
+Route::delete('/delete/{id}', 'CommentController@delete')->name('delete');
+Route::put('/updatecomment/{id}', 'CommentController@updatecomment')->name('updatecomment');
 
 
 
