@@ -106,13 +106,13 @@ class StudentController extends Controller
         $students->description = $request->get('description');
         $students->user_id = $request->get('tutor');
 
-       
+       if($request->picture != null){
           $img = $request->file('picture');
           $filename = time() . '.' . $img->getClientOriginalExtension();
           $location = public_path('image/'.$filename);
           Image::make($img)->resize(100,100)->save($location);
           $students->picture = $filename;
-     
+        }
         $students -> save();
          
 

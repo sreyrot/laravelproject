@@ -49,7 +49,7 @@
                           <div class="custom-file">
                             <label class="custom-file-lable"></label>
                             
-                            <input type="file" {{$students->picture}} class="form-control" name="picture" >
+                            <input type="file" value="{{asset('image/'.$students->picture)}}" class="form-control" name="picture" >
                           </div>
                       </div>
 
