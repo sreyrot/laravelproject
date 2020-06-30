@@ -119,6 +119,22 @@ class StudentController extends Controller
       return redirect('admin/dashboard');
     }
 
+
+     // archive followup
+  public function archiveFollowup($id){
+    $students = Student::find($id);
+    $students->activeFollowup = false;
+    $students-> save();
+    return back();
+  }
+
+  // back to active followup
+  public function backToFollowUP($id){
+    $students = Student::find($id);
+    $students->activeFollowup = true;
+    $students-> save();
+    return back();
+  }
   
   
 }

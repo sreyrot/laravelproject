@@ -1,6 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
+
+{{-- // script for tadatable --}}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
 <div class="container">
   <br>
   <!-- Nav tabs -->
@@ -15,81 +23,84 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>
-        <div class="container mt-5">
-          <a  data-toggle="modal" data-target="#myModal" href="{{route('students.create')}}"><i class="fa fa-user-plus" style="background: purple; padding: 20px; border-radius: 35px; color: #fff;" aria-hidden="true"></i></a>
-          <!-- The Modal -->
-          <div class="modal" id="myModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-              
-                <!-- Modal Header -->
-                <div class="modal-header">
-                  <h4 class="modal-title text-center">Add Student Followup</h4>
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <!-- Modal body -->
-                <div class="modal-body">
-                  <form action="{{route('students.store')}}" enctype="multipart/form-data" method="post">
-                      {{csrf_field()}}
-    
-                        <div class="form-group">
-                          <label for="fname">First Name</label>
-                          <input type="firstname" class="form-control" name="fname" >
-                      </div>
-    
-                        <div class="form-group">
-                            <label for="flname">Last Name</label>
-                            <input type="lastname" class="form-control" name="lname">
-                      </div>
-    
-                      <div class="form-group">
-                        <label for="class">Class</label>
-                       
-                          <input type="class" class="form-control" name="class">
-                      </div>
-    
-                      <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="" cols="10" rows="2"></textarea>
-                      </div>
-                      {{-- // add totur as select option --}}
-                      <div class="form-group">
-                        <select class="browser-default custom-select" >
-                          <option selected>Open this select menu</option>
-                          @foreach ($user as $item)
-                            <option name="tutor" value="{{$item->id}}">{{$item->firstName}}</option>
-                          @endforeach
-                        </select>
-                        </div>
-
-                 
-                      
-                        <label for="picture">Picture</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="form-control" name="picture" >
-                                <label class="custom-file-lable"></label>
-                            </div>
-                        </div>
-
-                  <button class="btn btn-success mt-4" type="submit">Save Add</button>
-
-                      </form>
-                </div>
-                
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-                
+      <div class="container mt-5">
+        <a  data-toggle="modal" data-target="#myModal" href="{{route('students.create')}}"><i class="fa fa-user-plus" style="background: purple; padding: 20px; border-radius: 35px; color: #fff;" aria-hidden="true"></i></a>
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title text-center">Add Student Followup</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form action="{{route('students.store')}}" enctype="multipart/form-data" method="post">
+                    {{csrf_field()}}
+
+                    <div class="row">
+                      <div class="col-6">
+                            <div class="form-group">
+                              <label for="fname">First Name</label>
+                              <input type="firstname" class="form-control" name="fname" >
+                          </div>
+        
+                            <div class="form-group">
+                                <label for="flname">Last Name</label>
+                                <input type="lastname" class="form-control" name="lname">
+                          </div>
+                          <div class="form-group">
+                            <label for="class">Class</label>
+                           
+                              <input type="class" class="form-control" name="class">
+                          </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="description">Description</label>
+                          <textarea name="description" class="form-control" id="" cols="10" rows="2"></textarea>
+                        </div>
+                        {{-- // add totur as select option --}}
+                        <div class="form-group">
+                          <select class="browser-default custom-select" >
+                            <option selected>Open this select menu</option>
+                            @foreach ($user as $item)
+                              <option name="tutor" value="{{$item->id}}">{{$item->firstName}}</option>
+                            @endforeach
+                          </select>
+                          </div>
+    
+                          <label for="picture">Picture</label>
+                          <div class="input-group">
+                              <div class="custom-file">
+                                  <input type="file" class="form-control" name="picture" >
+                                  <label class="custom-file-lable"></label>
+                              </div>
+                          </div>
+    
+                      </div>
+                    </div>
+                    <button class="btn btn-success mt-4" type="submit">Save Add</button>
+
+                    </form>
+              </div>
+              
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+              
             </div>
           </div>
+        </div>
 
-       </div>
+     </div>
         {{-- In Follow UP ////////////////////////////// --}}
-        <table class="mt-3 table table-bordered">
+        <table class="mt-3 table table-bordered" id="data_table">
+
           <tr>
            <th>Picture</th>
            <th>ID</th>
@@ -123,8 +134,9 @@
            </tr>
            @endif
         @endforeach
+
        </table>
-     
+
         {{-- In Out Of Follow Up///////////////////////////// --}}
     </div>
 
@@ -157,7 +169,9 @@
          @endif
       @endforeach
      </table>
+
     </div>
   </div>
 </div>
 @endsection
+

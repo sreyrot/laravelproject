@@ -230,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Str' => 'Illuminate\Support\Str',
         'Image' => Intervention\Image\Facades\Image::class,
-        'DataTable' => Yajra\DataTables\DataTablesServiceProvider::class,
+        'DataTables' => Yajra\DataTables\DataTablesServiceProvider::class,
         
     ],
 
